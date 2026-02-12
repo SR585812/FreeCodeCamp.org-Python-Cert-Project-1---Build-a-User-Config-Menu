@@ -1,0 +1,76 @@
+** start of main.py **
+
+def add_setting(settings_dict, new_setting):
+    # Make new setting lowercase, assign key and value to seperate variables:
+    new_setting_name, pref = (k.lower() for k in new_setting) 
+    #
+    # Check new setting name not already added:
+    for key in settings_dict.keys():
+        if key == new_setting_name:
+            return(f"Setting '{new_setting_name}' already exists! Cannot add a new setting with this name.")
+    #
+    # Add new setting and print confirmation:
+    settings_dict[new_setting_name] = pref
+    return(f"Setting '{new_setting_name}' added with value '{pref}' successfully!")
+    #
+
+def update_setting(settings_dict, updated_setting):
+    # Make updated setting lowercase, assing key and value to seperate variables:
+    updated_setting_name, new = (k.lower() for k in updated_setting)
+    # 
+    # Update setting if found:
+    for key in settings_dict.keys():
+        if key == updated_setting_name:
+            settings_dict[key] = new
+            return(f"Setting '{key}' updated to '{new}' successfully!")
+    #
+    # If setting not found, return:
+    return(f"Setting '{updated_setting_name}' does not exist! Cannot update a non-existing setting.")
+    #
+
+def delete_setting(settings_dict, delete):
+    # Make deleted setting name lowercase:
+    delete = delete.lower()
+    #
+    # Delete setting if found:
+    for key in settings_dict.keys():
+        if key == delete:
+            del settings_dict[key]
+            return(f"Setting '{key}' deleted successfully!")
+    #
+    # If setting not found, return:
+    return('Setting not found!')
+    #
+
+def view_settings(settings_dict):
+    # Confirm that settings are not empty:
+    if len(settings_dict) == 0:
+        return('No settings available.')
+    #
+    # Print user settings:
+    view_str = 'Current User Settings:'
+    for key in settings_dict.keys():
+        # Capitalize first letter of setting name:
+        name_cap = key.capitalize()
+        #
+        view_str += '\n' + name_cap + ': ' + settings_dict[key]
+    view_str += '\n'
+    return(view_str)
+    #
+
+
+### TEST CASES:
+    
+test_settings = {'one': 'two', 'three': 'four'}   
+
+#print(add_setting(test_settings, ('Five', 'six')))
+#print(update_setting(test_settings, ('Five', 'SEVEN'))) 
+#print(delete_setting(test_settings, 'One'))
+#print(view_settings(test_settings))
+
+#print(test_settings)
+
+###
+
+** end of main.py **
+
